@@ -1,18 +1,15 @@
 timestamps {
-    def label any
-    node(label) {
-        container('uam-automation-artifactory') {
-            try {
-                stage('Stage One') {
-                    echo "This is Stage one of the Jenkinsfile"
-                }
-                     currentBuild.result = 'SUCCESS'
-            }catch (e) {
-                currentBuild.result = 'FAILED'
-                throw e
-            } finally {
-            cleanWs()
+    node {
+        try {
+            stage('Stage One') {
+                echo "This is Stage one of the Jenkinsfile"
             }
+                currentBuild.result = 'SUCCESS'
+        }catch (e) {
+            currentBuild.result = 'FAILED'
+            throw e
+        } finally {
+        cleanWs()
         }
     }
 }
