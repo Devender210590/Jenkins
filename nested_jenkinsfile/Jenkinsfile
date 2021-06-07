@@ -1,14 +1,15 @@
 timestamps {
-agent any
-    try {
-        stage('Stage One') {
-            echo "This is Stage one of the Jenkinsfile"
+    node {
+        try {
+            stage('Stage One') {
+                echo "This is Stage one of the Jenkinsfile"
+            }
+                currentBuild.result = 'SUCCESS'
+        }catch (e) {
+            currentBuild.result = 'FAILED'
+            throw e
+        } finally {
+        cleanWs()
         }
-             currentBuild.result = 'SUCCESS'
-    }catch (e) {
-        currentBuild.result = 'FAILED'
-        throw e
-    } finally {
-    cleanWs()
     }
 }
